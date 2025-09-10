@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Líder</title>
+<style>
+  body { background: linear-gradient(135deg, #00010e, #020111); color: white; font-family: 'Poppins', sans-serif; padding: 20px; }
+  input { padding: 10px; margin: 8px; width: 250px; border-radius: 5px; border: none; }
+  button { padding: 10px 20px; background: #ffc107; color: #111; border: none; border-radius: 5px; cursor: pointer; font-weight: 600; margin: 5px; }
+</style>
+</head>
+<body>
+<h1 id="titulo"></h1>
+<p id="info"></p>
+<input type="text" id="novoMembro" placeholder="Nome do novo membro">
+<button onclick="adicionarMembro()">Adicionar Membro</button>
+<h3>Membros cadastrados:</h3>
+<ul id="listaMembros"></ul>
+<script>
+const params = new URLSearchParams(window.location.search);
+const celula = params.get('celula') || 'SEM_CELULA';
+const lideres = {
+  "HESED": "Mannoella",
+  "KADOSH": "LAYLA RAYSSA",
+  "RUACH": "MIZAEL / LARISSA"
+};
+document.getElementById('titulo').textContent = `Painel da Célula ${celula}`;
+document.getElementById('info').textContent = `Líder: ${lideres[celula] || 'Desconhecido'}`;
+function atualizarLista() {
+  const lista = document.getElementById('listaMembros');
+  lista.innerHTML = '';
+  const membros = JSON.parse(localStorage.getItem(`membros_${celula}`)) || [];
+  membros.forEach((membro, index) => {
+    const li = document.createElement('li');
+    li.textContent = membro;
+    const btn = document.createElement('button');
+    btn.textContent = 'Remover';
+    btn.onclick = () => {
+      membros.splice(index, 1);
+      localStorage.setItem(`membros_${celula}`, JSON.stringify(membros));
+      atualizarLista();
+    };
+    li.appendChild(btn);
+    lista.appendChild(li);
+  });
+}
+function adicionarMembro() {
+  const nome = document.getElementById('novoMembro').value.trim();
+  if (nome) {
+    const membros = JSON.parse(localStorage.getItem(`membros_${celula}`)) || [];
+    membros.push(nome);
+    localStorage.setItem(`membros_${celula}`, JSON.stringify(membros));
+    document.getElementById('novoMembro').value = '';
+    atualizarLista();
+  }
+}
+atualizarLista();
+</script>
+</body>
+</html>
