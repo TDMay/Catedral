@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ministério de Acolhimento</title>
+
+  <!-- Fontes e Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="acolhimento.css" />
+</head>
+<body>
+
+  <section class="hero">
+    <h1>Ministério de Acolhimento</h1>
+  </section>
+
+  <section class="container">
+    <h2>Seja o primeiro sorriso de quem chega</h2>
+    <p>
+      O Ministério de Acolhimento é responsável por receber calorosamente todos que chegam à igreja.
+      Acreditamos que um abraço, um sorriso ou uma palavra de carinho podem mudar a vida de alguém.
+    </p>
+    <p>
+      Nossa equipe é treinada para criar um ambiente acolhedor, seguro e amigável, desde a entrada até a despedida.
+    </p>
+    <p>
+      Se você ama pessoas e deseja fazer parte da experiência de boas-vindas da nossa igreja, junte-se a nós!
+    </p>
+
+    <div class="info-cards">
+      <div class="card">
+        <i class="fas fa-smile-beam"></i>
+        <h3>Empatia</h3>
+        <p>Transmitimos o amor de Cristo com gestos simples e calor humano.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-hands-helping"></i>
+        <h3>Serviço</h3>
+        <p>Servimos com alegria e dedicação, acolhendo a todos com excelência.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-users"></i>
+        <h3>Comunidade</h3>
+        <p>Fortalecemos os laços entre os irmãos desde o primeiro contato.</p>
+      </div>
+    </div>
+
+    <a href="cadastro.html" class="btn-voltar">Quero fazer parte</a>
+  </section>
+
+  <!-- Carrossel 3D -->
+  <section class="carousel-section">
+    <h2>Momentos do Acolhimento</h2>
+    <div class="carousel-3d">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-item active"><img src="https://i.pinimg.com/1200x/38/3d/db/383ddbbf28be50e537f1df3c024cbb86.jpg" alt="1"></div>
+        <div class="carousel-item"><img src="https://i.pinimg.com/736x/e5/92/0a/e5920a7d1613fbc053099f95bafa2664.jpg" alt="2"></div>
+        <div class="carousel-item"><img src="https://i.pinimg.com/1200x/74/24/46/7424469f2a9cfecfab42454cf4c38b65.jpg" alt="3"></div>
+        <div class="carousel-item"><img src="https://i.pinimg.com/1200x/f6/38/3b/f6383b9737aaa4c2e87b0d15da65a251.jpg" alt="4"></div>
+        <div class="carousel-item"><img src="https://i.pinimg.com/1200x/d5/37/09/d53709a0a445f5a617e4d9b0e7e803d2.jpg" alt="5"></div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="carousel-btn" onclick="moveSlide(1)">&#10095;</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Igreja Catedral — Todos os direitos reservados</p>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    const track = document.getElementById('carouselTrack');
+    const items = document.querySelectorAll('.carousel-item');
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      items.forEach((item, index) => {
+        item.classList.remove('active');
+        if (index === currentIndex) {
+          item.classList.add('active');
+        }
+      });
+      const offset = -currentIndex * (items[0].offsetWidth + 30);
+      track.style.transform = `translateX(${offset}px)`;
+    }
+
+    function moveSlide(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = items.length - 1;
+      if (currentIndex >= items.length) currentIndex = 0;
+      updateCarousel();
+    }
+
+    setInterval(() => moveSlide(1), 5000);
+  </script>
+
+</body>
+</html>
